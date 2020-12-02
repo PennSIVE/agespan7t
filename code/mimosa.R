@@ -284,10 +284,10 @@ mimosa_training <- function(brain_mask, FLAIR, T1, T2 = NULL, PD = NULL, tissue 
 
 
 mimosa_training = mimosa_training(
-  brain_mask = filepaths$brainmask[-index],
+  brain_mask = tissues,
   FLAIR = filepaths$flair[-index],
   T1 = filepaths$t1[-index],
-  tissue = tissues,
+  tissue = TRUE,
   gold_standard = filepaths$mask[-index],
   cores = as.numeric(Sys.getenv('NSLOTS')),
   verbose = TRUE,
@@ -308,10 +308,10 @@ flair.cur = readnii(filepaths$flair[index])
 brainmask.cur = readnii(filepaths$brainmask[index])
 
 mimosa_testdata = mimosa_data(
-  brain_mask = brainmask.cur,
+  brain_mask = readnii(filepaths$tissue[index]),
   FLAIR = flair.cur,
   T1 = t1.cur,
-  tissue = readnii(filepaths$tissue[index]),
+  tissue = TRUE,
   cores = as.numeric(Sys.getenv('NSLOTS')),
   verbose = T)
 
@@ -337,4 +337,5 @@ writenii(probability_map, paste0(train_dir, "/", subjs[index],
 # thresh = 0.25
 # lesmask = ifelse(probability_map > thresh, 1, 0)
 # writenii(lesmask, paste0(train_dir, "/", subjs[index], "/lesmask_", as.character(thresh * 100), "_debug.nii.gz"))
+
 
