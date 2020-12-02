@@ -315,6 +315,7 @@ message("model done training!")
 print(filepaths$t1[index])
 
 t1.cur = readnii(filepaths$t1[index])
+flair.cur = readnii(filepaths$flair[index])
 brainmask.cur = readnii(filepaths$brainmask[index])
 
 mimosa_testdata = mimosa_data(
