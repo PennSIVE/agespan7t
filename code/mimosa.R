@@ -15,23 +15,12 @@ filepaths$flair[-index]
 filepaths$t1[-index]
 start = proc.time()
 
-# tissue.cur = readnii(filepaths$tissue[index])
-# brain_mask = tissue.cur > 0
-# image_eroded = fslerode(brain_mask, kopts = "-kernel box 5x5x5", retimg = TRUE)
-# thresh = tissue.cur < 3000
-# tissue_mask = image_eroded*thresh
-# # tissue_mask = readnii(paste0("/cbica/projects/agespan7T/weirdness/", index, ".nii.gz"))
-
-# writenii(tissue_mask, paste0(train_dir, "/", subjs[index],
-#                                  "/tissue_mask_11_25.nii.gz"))
-
-tissues = character()
+tissues = list()
 i = 1
 for (path in filepaths$tissue[-index]) {
-  tissues[i] = readnii(path)
-  i = i + 1
+   tissues[[i]] = readnii(path)
+   i = i + 1
 }
-
 
 #' @title Train MIMoSA model on full training set
 #'
