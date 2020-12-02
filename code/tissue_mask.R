@@ -1,4 +1,4 @@
-library(neurobase)
+library(fslr)
 
 index = as.numeric(Sys.getenv("INDEX"))
 train_dir = "/cbica/projects/agespan7T/repos/agespan7t/data/scitran/cnet/7T-MS-agespan"
