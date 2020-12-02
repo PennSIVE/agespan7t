@@ -15,13 +15,6 @@ filepaths$flair[-index]
 filepaths$t1[-index]
 start = proc.time()
 
-tissues = list()
-i = 1
-for (path in filepaths$tissue[-index]) {
-   tissues[[i]] = readnii(path)
-   i = i + 1
-}
-
 #' @title Train MIMoSA model on full training set
 #'
 #' @description This function trains the MIMoSA model from the data frames
@@ -119,6 +112,10 @@ mimosa_training <- function(brain_mask, FLAIR, T1, T2 = NULL, PD = NULL, tissue 
       formula = gold_standard ~ FLAIR_10 * FLAIR + FLAIR_20 * FLAIR + T1_10 * T1 + T1_20 * T1 +
         FLAIRonT1_intercepts + T1onFLAIR_intercepts +
         FLAIRonT1_slopes + T1onFLAIR_slopes
+      print("LOOK HERE")
+      print(getwd())
+      print(subject_files)
+      print(class(subject_files))
       if (all(file.exists(subject_files))) {
         imgs_list  = lapply(subject_files, readnii, reorient = FALSE)
       }
@@ -284,7 +281,7 @@ mimosa_training <- function(brain_mask, FLAIR, T1, T2 = NULL, PD = NULL, tissue 
 
 
 mimosa_training = mimosa_training(
-  brain_mask = tissues,
+  brain_mask = filepaths$tissue[-index],
   FLAIR = filepaths$flair[-index],
   T1 = filepaths$t1[-index],
   tissue = TRUE,
@@ -337,5 +334,6 @@ writenii(probability_map, paste0(train_dir, "/", subjs[index],
 # thresh = 0.25
 # lesmask = ifelse(probability_map > thresh, 1, 0)
 # writenii(lesmask, paste0(train_dir, "/", subjs[index], "/lesmask_", as.character(thresh * 100), "_debug.nii.gz"))
+
 
 
