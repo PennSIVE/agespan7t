@@ -1,5 +1,6 @@
 library(fslr)
 library(mimosa)
+library(parallel)
 
 index = as.numeric(Sys.getenv("INDEX"))
 train_dir = "../data/scitran/cnet/7T-MS-agespan"
