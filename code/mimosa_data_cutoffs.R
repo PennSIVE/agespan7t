@@ -1,6 +1,7 @@
 library(fslr)
 library(mimosa)
 library(parallel)
+library(extrantsr)
 source("imco.R")
 
 index = as.numeric(Sys.getenv("INDEX"))
