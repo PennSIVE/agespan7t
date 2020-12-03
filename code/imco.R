@@ -1,6 +1,8 @@
 source("imco_pca.R")
 source("imco_reg.R")
 source("weighted_slr.R")
+source("make_ants_image.R")
+source("get_weights.R")
 #' @title Inter-modal Coupling Model
 #'
 #' @description Implements full volumetric IMCo coupling estimation on a single subject
